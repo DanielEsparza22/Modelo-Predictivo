@@ -1,9 +1,12 @@
+# Implementación del primer modelo - redes neuronales
+
 setwd("C:/Users/danie/SOFTWARE/9NO/SeminarioTesis/Dataset")
 accidente <- read.csv("accidentes_carretera.csv",row.names = 1)
 
-#Estructura del dataframe
+#Estructura del dataset
 str(accidente)
 
+#Creamos y aplciamos una función de normalización de datos
 normalize <- function(x){return((x-min(x)) / (max(x) - min(x)))}
 
 accidente_norm <- as.data.frame(lapply(accidente,normalize))
@@ -14,15 +17,14 @@ accident_test <- accidente_norm[128:159, ]
 
 summary(accidente_norm$Indice_Accidentalidad)
 
-#Entrenar el algoritmo usando una libreria llamada neuralnet
-#Esta será usando una red neural simple con un solo nodo oculto, es decir, solo tendrá una neurona
+#Entrenar el algoritmo usando neuralnet
 library(neuralnet)
 
 #Agregamos esta opción para que los resultados sean repetibles, es decir, evitar que cada vez que lo ejecutemos hayan valores
 #diferentes
 set.seed(12354)
 
-#Usando neuralnet
+#Crear el modelo usando neuralnet
 model <- neuralnet(Indice_Accidentalidad~Dia+Rango_Hora+Rango_Edad+Genero+Tipo_Camino+Tipo_Vehiculo,data = accident_train, hidden = 5)
 
 #Visualizamos la topología de red
@@ -34,6 +36,7 @@ model_results <- compute(model,accident_test[1:6])
 
 #Obtenemos solo parte donde se guardan las predicciones, usando net.result
 predicted_accident <- model_results$net.result
+head(predicted_accident)
 
 
 # Metricas de desempeño

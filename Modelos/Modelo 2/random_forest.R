@@ -11,6 +11,8 @@ accidentes <- read.csv(ruta, row.names = 1)
 str(accidentes)
 class(accidentes)
 
+
+#Creamos y aplciamos una función de normalización de datos
 normalize <- function(x){return((x-min(x)) / (max(x) - min(x)))}
 
 accidente_norm <- as.data.frame(lapply(accidentes,normalize))
