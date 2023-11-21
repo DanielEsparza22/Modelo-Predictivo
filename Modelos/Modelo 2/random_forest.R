@@ -12,7 +12,7 @@ str(accidentes)
 class(accidentes)
 
 
-#Creamos y aplciamos una función de normalización de datos
+#Creamos y aplicamos una función de normalización de datos
 normalize <- function(x){return((x-min(x)) / (max(x) - min(x)))}
 
 accidente_norm <- as.data.frame(lapply(accidentes,normalize))
@@ -29,7 +29,7 @@ modelo_rf <- randomForest(Indice_Accidentalidad ~ Dia + Rango_Hora + Rango_Edad 
 
 modelo_rf
 
-# Prediccion
+# Realizamos la prediccion
 predicciones_rf <- predict(modelo_rf, accident_test)
 print(head(predicciones_rf))
 

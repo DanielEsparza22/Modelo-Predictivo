@@ -27,7 +27,7 @@ set.seed(12354)
 #Crear el modelo usando neuralnet
 model <- neuralnet(Indice_Accidentalidad~Dia+Rango_Hora+Rango_Edad+Genero+Tipo_Camino+Tipo_Vehiculo,data = accident_train, hidden = 5)
 
-#Visualizamos la topología de red
+#Visualizamos la red neuronal
 plot(model,rep = "best")
 
 #Usando la función compute() vamos a generar las predicciones correspondientes.
@@ -49,7 +49,7 @@ cor(predicted_accident, accident_test$Indice_Accidentalidad)[,1]
 mse <- mean((accident_test$Indice_Accidentalidad - predicted_accident)^2)
 
 
-print(paste("Error Cuadrático Medio (MSE):", mse))
+print(paste("Error Cuadrático Medio:", mse))
 
 #RECALL
 # Definir un umbral para clasificar en categorías de riesgo
