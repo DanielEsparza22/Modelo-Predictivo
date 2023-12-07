@@ -6,7 +6,7 @@ accidente <- read.csv("accidentes_carretera.csv",row.names = 1)
 #Estructura del dataset
 str(accidente)
 
-#Creamos y aplciamos una función de normalización de datos
+#Creamos y aplicamos una función de normalización de datos
 normalize <- function(x){return((x-min(x)) / (max(x) - min(x)))}
 
 accidente_norm <- as.data.frame(lapply(accidente,normalize))
@@ -53,7 +53,7 @@ print(paste("Error Cuadrático Medio:", mse))
 
 #RECALL
 # Definir un umbral para clasificar en categorías de riesgo
-umbral <- 0.5  # Ajusta el umbral según tus necesidades
+umbral <- 0.4  # Ajusta el umbral según tus necesidades
 
 # Convertir las predicciones en clasificación binaria (por encima del umbral o no)
 predicciones_binarias <- ifelse(predicted_accident > umbral, 1, 0)
@@ -68,8 +68,9 @@ recall <- verdaderos_positivos / todos_positivos_reales
 print(paste("Recall para la categoría de riesgo alto:", recall))
 
 
+# PRECISION
 # Convertir las predicciones en clasificación binaria (por encima del umbral o no)}
-umbral_p <- 0.6
+umbral_p <- 0.4
 predicciones_binarias <- ifelse(predicted_accident > umbral_p, 1, 0)
 
 # Calcular la Precisión
@@ -89,6 +90,7 @@ confusion_matrix <- table(Actual = valores_reales_binarios, Predicted = predicci
 
 print("Matriz de Confusión:")
 print(confusion_matrix)
+
   
 
 
